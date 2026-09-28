@@ -1,0 +1,411 @@
+---
+const contactos = [
+  {
+    label: "Email",
+    value: "camiestevez25@gmail.com",
+    href: "mailto:camiestevez25@gmail.com",
+    icon: "✉️",
+  },
+  {
+    label: "WhatsApp",
+    value: "+54 2364 322872",
+    href: "https://wa.me/5492364322872",
+    icon: "💬",
+  },
+  {
+    label: "LinkedIn",
+    value: "Camila Estévez",
+    href: "https://www.linkedin.com/in/camila-estevez-961715314",
+    icon: "💼",
+  },
+  {
+    label: "GitHub",
+    value: "camiestevez25-netizen",
+    href: "https://github.com/camiestevez25-netizen",
+    icon: "🐙",
+  },
+  {
+    label: "Instagram",
+    value: "@camii_estevezz",
+    href: "https://instagram.com/camii_estevezz",
+    icon: "📷",
+  },
+];
+
+const sectionColor = "var(--burgundy)";
+---
+
+<section class="contact" id="contact">
+  
+
+  <div class="contact__inner">
+    <header class="contact__header">
+      <h2 class="contact__title">CONTACTO</h2>
+      <div class="contact__title-underline"></div>
+      <p class="contact__intro">
+        ¿Tenés una idea, un proyecto o simplemente querés charlar? Escribime y te respondo a la brevedad.
+      </p>
+    </header>
+
+    <div class="contact__grid">
+      <div class="contact__links">
+        {contactos.map((c) => (
+          <a
+            href={c.href}
+            class="contact__link"
+            target={c.href.startsWith("http") ? "_blank" : undefined}
+            rel={c.href.startsWith("http") ? "noopener" : undefined}
+          >
+            <span class="contact__link-icon">{c.icon}</span>
+            <div class="contact__link-info">
+              <span class="contact__link-label">{c.label}</span>
+              <span class="contact__link-value">{c.value}</span>
+            </div>
+            <span class="contact__link-arrow">→</span>
+          </a>
+        ))}
+      </div>
+
+      <!-- form -->
+      <form
+        class="contact__form"
+        id="contactForm"
+        action= "https://formspree.io/f/xoevyejp"
+        method="POST"
+      >
+        <div class="contact__field">
+          <label for="name">Nombre</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="Tu nombre"
+          />
+        </div>
+
+        <div class="contact__field">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="tu@email.com"
+          />
+        </div>
+
+        <div class="contact__field">
+          <label for="message">Mensaje</label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows="5"
+            placeholder="Contame sobre tu proyecto..."
+          ></textarea>
+        </div>
+
+        <button type="submit" class="contact__submit">
+          <span>Enviar mensaje</span>
+          <span class="contact__submit-arrow">→</span>
+        </button>
+
+        <p class="contact__form-status" id="formStatus"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    position: relative;
+    padding: 6rem 2rem 5rem;
+    background: var(--cream);
+    scroll-margin-top: 90px;
+  }
+
+  .contact__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .contact__scallop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 22px;
+    background: var(--dark-red);
+    mask-image: radial-gradient(circle at 50% 0, transparent 22px, black 23px);
+    mask-size: 44px 22px;
+    mask-repeat: repeat-x;
+    -webkit-mask-image: radial-gradient(circle at 50% 0, transparent 22px, black 23px);
+    -webkit-mask-size: 44px 22px;
+    -webkit-mask-repeat: repeat-x;
+  }
+
+  .contact__header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .contact__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--burgundy);
+    letter-spacing: 0.05em;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .contact__title-underline {
+    width: 80px;
+    height: 2px;
+    background: var(--burgundy);
+    margin: 1rem auto 1.5rem;
+    opacity: 0.5;
+  }
+
+  .contact__intro {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: var(--burgundy);
+    opacity: 0.7;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* grid */
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  /* links de contacto */
+  .contact__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .contact__link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: transparent;
+    border: 2px solid var(--burgundy);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--burgundy);
+    transition: all 0.3s ease;
+  }
+
+  .contact__link:hover {
+    background: var(--burgundy);
+    color: var(--cream);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px -10px var(--burgundy);
+  }
+
+  .contact__link-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .contact__link-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .contact__link-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+
+  .contact__link-value {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .contact__link-arrow {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .contact__link:hover .contact__link-arrow {
+    transform: translateX(5px);
+  }
+
+  /* form */
+  .contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 2rem;
+    border: 2px solid var(--burgundy);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  .contact__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .contact__field label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    opacity: 0.75;
+  }
+
+  .contact__field input,
+  .contact__field textarea {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--burgundy);
+    border-radius: 12px;
+    background: var(--cream);
+    color: var(--burgundy);
+    outline: none;
+    transition: all 0.3s ease;
+    resize: vertical;
+  }
+
+  .contact__field input::placeholder,
+  .contact__field textarea::placeholder {
+    color: var(--burgundy);
+    opacity: 0.4;
+  }
+
+  .contact__field input:focus,
+  .contact__field textarea:focus {
+    border-color: var(--dark-red);
+    box-shadow: 0 0 0 3px rgba(123, 30, 40, 0.15);
+  }
+
+  .contact__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.95rem 2rem;
+    background: var(--burgundy);
+    color: var(--cream);
+    border: 2px solid var(--burgundy);
+    border-radius: 999px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+  }
+
+  .contact__submit:hover {
+    background: var(--dark-red);
+    border-color: var(--dark-red);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -10px var(--burgundy);
+  }
+
+  .contact__submit-arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .contact__submit:hover .contact__submit-arrow {
+    transform: translateX(5px);
+  }
+
+  .contact__form-status {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    text-align: center;
+    margin: 0;
+    min-height: 1.25rem;
+    color: var(--burgundy);
+  }
+
+  .contact__form-status.success {
+    color: var(--jade);
+  }
+
+  .contact__form-status.error {
+    color: var(--dark-red);
+  }
+
+  /*responsive */
+  @media (max-width: 900px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .contact {
+      padding: 5rem 1.25rem 4rem;
+    }
+
+    .contact__form {
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById("contactForm") as HTMLFormElement;
+  const status = document.getElementById("formStatus");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!status) return;
+
+    status.textContent = "Enviando...";
+    status.className = "contact__form-status";
+
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        status.textContent = "✅ ¡Mensaje enviado! Te respondo pronto.";
+        status.className = "contact__form-status success";
+        form.reset();
+      } else {
+        status.textContent = "❌ Hubo un error. Probá de nuevo o escribime directo.";
+        status.className = "contact__form-status error";
+      }
+    } catch (error) {
+      status.textContent = "❌ Error de conexión. Probá de nuevo.";
+      status.className = "contact__form-status error";
+    }
+  });
+</script>

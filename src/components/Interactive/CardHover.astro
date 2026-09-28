@@ -1,0 +1,75 @@
+---
+// src/components/Interactive/CardHover.astro
+---
+
+<div class="card-container" data-tilt>
+  <div class="card">
+    <div class="card-image">
+      <img src="/assets/project1.jpg" alt="Proyecto" />
+    </div>
+    <div class="card-content">
+      <h3>Nombre del Proyecto</h3>
+      <p>Descripción breve del proyecto</p>
+      <div class="tech-stack">
+        <span>React</span>
+        <span>TypeScript</span>
+        <span>Tailwind</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Efecto de inclinación 3D
+  document.querySelectorAll('.card-container').forEach(container => {
+    container.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+      
+      container.style.transform = 
+        `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      container.style.transform = 
+        'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
+  });
+</script>
+
+<style>
+  .card-container {
+    transition: transform 0.1s ease;
+    transform-style: preserve-3d;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    overflow: hidden;
+    padding: 1.5rem;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 20px 60px rgba(108, 99, 255, 0.15);
+  }
+
+  .tech-stack span {
+    display: inline-block;
+    background: #f0f0ff;
+    color: #6C63FF;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin: 0.25rem;
+  }
+</style>

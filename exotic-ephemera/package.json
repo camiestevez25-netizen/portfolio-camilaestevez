@@ -1,5 +1,5 @@
 {
-  "name": "portfolio-camilaestevez",
+  "name": "exotic-ephemera",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -12,9 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^6.0.5",
-    "@tailwindcss/vite": "^4.3.3",
-    "astro": "^6.3.1",
-    "tailwindcss": "^4.3.3"
+    "astro": "^7.3.2"
+  },
+  "allowScripts": {
+    "esbuild": true
   }
 }

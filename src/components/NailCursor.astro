@@ -1,0 +1,196 @@
+---
+---
+
+<div class="nail-cursor" id="nailCursor" aria-hidden="true">
+  <div class="nail-cursor__shape"></div>
+</div>
+
+<style>
+  @media (max-width: 1024px) {
+    .nail-cursor {
+      display: none !important;
+    }
+  }
+
+  .nail-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 22px;
+    height: 30px;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%) rotate(-20deg);
+    transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.3s ease;
+    will-change: transform;
+  }
+
+  .nail-cursor__shape {
+    width: 100%;
+    height: 100%;
+    background: var(--burgundy);
+    border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+    position: relative;
+    box-shadow:
+      0 4px 12px rgba(123, 30, 40, 0.35),
+      inset 0 0 6px rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  /* Brillo */
+  .nail-cursor__shape::before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    width: 35%;
+    height: 30%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    filter: blur(1px);
+  }
+
+  /* Highlight superior */
+  .nail-cursor__shape::after {
+    content: '';
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    width: 70%;
+    height: 15%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    border-radius: 50%;
+    filter: blur(0.5px);
+  }
+
+  /* Estado hover: solo crece */
+  .nail-cursor.is-hover {
+  width: 26px;
+  height: 34px;
+}
+
+  .nail-cursor.is-hover .nail-cursor__shape {
+    background: var(--dark-red);
+    box-shadow:
+      0 8px 20px rgba(123, 30, 40, 0.5),
+      inset 0 0 8px rgba(255, 255, 255, 0.2);
+  }
+
+  .nail-cursor.is-hidden {
+    opacity: 0;
+  }
+
+  /* Ocultar cursor normal */
+  @media (min-width: 1025px) {
+    body,
+    a,
+    button {
+      cursor: none;
+    }
+  }
+</style>
+
+<script>
+  function initNailCursor() {
+    // Evitar doble inicialización
+    if ((window as any).__nailCursorReady) return;
+    (window as any).__nailCursorReady = true;
+
+    if (!window.matchMedia("(min-width: 1025px)").matches) return;
+
+    const cursor = document.getElementById("nailCursor");
+    if (!cursor) return;
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+    let angle = -20;
+
+    document.addEventListener("mousemove", (e) => {
+      const dx = e.clientX - mouseX;
+      const dy = e.clientY - mouseY;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (Math.abs(dx) > 1 || Math.abs(dy) > 1) {
+        angle = Math.atan2(dy, dx) * (180 / Math.PI) - 90;
+        angle = Math.max(-40, Math.min(40, angle));
+      }
+    });
+
+    function animate() {
+      cursorX += (mouseX - cursorX) * 0.15;
+      cursorY += (mouseY - cursorY) * 0.15;
+
+      if (cursor) {
+        cursor.style.left = `${cursorX}px`;
+        cursor.style.top = `${cursorY}px`;
+        cursor.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Solo crece en elementos clickeables
+    function attachHoverListeners() {
+      const interactiveSelectors = "a, button, .liquid-btn, [data-cursor]";
+      document.querySelectorAll(interactiveSelectors).forEach((el) => {
+        if ((el as any).__cursorReady) return;
+        (el as any).__cursorReady = true;
+
+        el.addEventListener("mouseenter", () => {
+          cursor?.classList.add("is-hover");
+        });
+
+        el.addEventListener("mouseleave", () => {
+          cursor?.classList.remove("is-hover");
+        });
+      });
+    }
+
+    attachHoverListeners();
+
+    document.addEventListener("mouseleave", () => {
+      cursor?.classList.add("is-hidden");
+    });
+
+    document.addEventListener("mouseenter", () => {
+      cursor?.classList.remove("is-hidden");
+    });
+
+    document.addEventListener("mousedown", () => {
+      if (cursor) {
+        cursor.style.width = "16px";
+        cursor.style.height = "22px";
+      }
+    });
+
+    document.addEventListener("mouseup", () => {
+      if (cursor) {
+        cursor.style.width = "";
+        cursor.style.height = "";
+      }
+    });
+
+    // Re-enganchar listeners cuando cambia el contenido (por navegación)
+    document.addEventListener("astro:page-load", () => {
+      attachHoverListeners();
+    });
+  }
+
+  initNailCursor();
+</script>

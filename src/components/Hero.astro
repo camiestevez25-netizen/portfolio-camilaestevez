@@ -1,0 +1,149 @@
+---
+---
+
+<section class="hero-section">
+  <!-- Rayas verticales de fondo -->
+  <div class="stripes" aria-hidden="true"></div>
+
+  <!-- Contenido -->
+  <div class="hero-content">
+    <p class="hero-author">By Camila Estévez</p>
+
+    <h1 class="hero-title">PORTFOLIO</h1>
+
+    <p class="hero-role">Desarrolladora</p>
+
+    <a href="/projects" class="liquid-btn">
+  <span class="liquid-btn__text">Ver mis trabajos</span>
+  <span class="liquid-btn__fill"></span>
+</a>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    min-height: calc(100vh - 90px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 4rem 2rem;
+  }
+
+  /* rayas verticales */
+  .stripes {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--cream) 0px,
+      var(--cream) 40px,
+      var(--blue) 40px,
+      var(--blue) 80px
+    );
+    z-index: 0;
+  }
+
+  /* contenido */
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 900px;
+  }
+
+  .hero-author {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    color: var(--burgundy);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4.5rem, 18vw, 12rem);
+    color: var(--burgundy);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .hero-role {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    color: var(--burgundy);
+    margin-top: 0.5rem;
+    font-weight: 500;
+  }
+
+  /*btn */
+  .liquid-btn {
+  position: relative;
+  display: inline-block;
+  margin-top: 3rem;
+  padding: 1rem 2.5rem;
+  background: transparent;
+  color: var(--burgundy);
+  border: 2px solid var(--burgundy);
+  border-radius: 999px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.4s ease 0.1s, letter-spacing 0.4s ease;
+}
+
+.liquid-btn__text {
+  position: relative;
+  z-index: 2;
+  transition: letter-spacing 0.4s ease;
+}
+
+/* relleno de btn */
+.liquid-btn__fill {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  width: 120%;
+  height: 200%;
+  background: var(--burgundy);
+  border-radius: 45% 45% 0 0 / 30% 30% 0 0;
+  z-index: 1;
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Efecto hover */
+.liquid-btn:hover {
+  color: var(--cream);
+  letter-spacing: 0.15em;
+}
+
+.liquid-btn:hover .liquid-btn__fill {
+  transform: translateX(-50%) translateY(0%);
+}
+
+/* Efecto gota cuando sale del hover */
+.liquid-btn:not(:hover) .liquid-btn__fill {
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
+}
+  /*responsive */
+  @media (max-width: 640px) {
+    .stripes {
+      background: repeating-linear-gradient(
+        90deg,
+        var(--cream) 0px,
+        var(--cream) 24px,
+        var(--blue) 24px,
+        var(--blue) 48px
+      );
+    }
+  }
+</style>

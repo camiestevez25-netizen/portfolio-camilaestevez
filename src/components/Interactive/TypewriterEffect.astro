@@ -1,0 +1,53 @@
+---
+// src/components/Interactive/TypewriterEffect.astro
+---
+
+<div class="typewriter-container">
+  <span class="typewriter-text" id="typewriter"></span>
+</div>
+
+<script>
+  const words = ['Desarrollador Web', 'Diseñador UI/UX', 'Creador de Soluciones'];
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const element = document.getElementById('typewriter');
+
+  function typeEffect() {
+    const currentWord = words[wordIndex];
+    
+    if (isDeleting) {
+      element.textContent = currentWord.substring(0, charIndex--);
+    } else {
+      element.textContent = currentWord.substring(0, charIndex++);
+    }
+
+    if (!isDeleting && charIndex === currentWord.length) {
+      setTimeout(() => isDeleting = true, 2000);
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+    }
+
+    setTimeout(typeEffect, isDeleting ? 50 : 100);
+  }
+
+  typeEffect();
+</script>
+
+<style>
+  .typewriter-container {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6C63FF;
+    min-height: 3rem;
+  }
+  .typewriter-text::after {
+    content: '|';
+    animation: blink 0.7s infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>

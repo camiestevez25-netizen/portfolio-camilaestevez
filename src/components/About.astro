@@ -1,0 +1,320 @@
+---
+import Card from "./Card.astro";
+
+const datos = [
+  {
+    icon: "📍",
+    title: "UBICACIÓN",
+    text: "Rojas, Buenos Aires — Argentina",
+  },
+  {
+    icon: "🎓",
+    title: "FORMACIÓN",
+    text: "Técnica en Informática · Estudiante avanzada de Desarrollo de Software (Inst. 125)",
+  },
+  {
+    icon: "💼",
+    title: "EXPERIENCIA",
+    text: "Prácticas en BITONE · Frontend en BRIXCODE (Angular + Java)",
+  },
+  {
+    icon: "✨",
+    title: "SOBRE MÍ",
+    text: "Creativa, sociable y fanática del buen diseño",
+  },
+];
+
+const sectionColor = "var(--burgundy)";---
+
+<section class="about" id="about">
+
+  <div class="about__inner">
+    <header class="about__header">
+      <h2 class="about__title">SOBRE MÍ</h2>
+      <div class="about__title-underline"></div>
+    </header>
+
+    <div class="about__grid">
+      <!-- Foto estilo polaroid -->
+      <div class="about__photo-wrapper">
+        <div class="about__polaroid">
+          <img
+            src="/images/camila.jpg"
+            alt="Foto de Camila Estévez"
+            class="about__photo"
+          />
+          <p class="about__caption">Camila — 2026</p>
+        </div>
+      </div>
+
+      <!-- Texto principal -->
+      <div class="about__text">
+        <h3 class="about__greeting">Hola, soy Camila 👋</h3>
+
+        <p class="about__paragraph">
+          Técnica en Informática y estudiante avanzada de Desarrollo de Software.
+          Mi camino empezó en la Escuela Técnica N°1 de Rojas y hoy sigue
+          creciendo entre líneas de código y diseños de uñas — dos mundos que,
+          aunque parezcan lejanos, comparten lo mismo:
+          <strong>atención al detalle y pasión por lo visual</strong>.
+        </p>
+
+        <p class="about__paragraph">
+          Quiero dedicarme al <strong>frontend</strong> para seguir combinando
+          diseño, color y experiencia de usuario, con el toque profesional que
+          cada proyecto necesita.
+        </p>
+
+       <!-- CV -->
+<div class="about__cta-wrapper">
+  <a
+    href="/CV_Estevez_Camila.pdf"
+    download
+    class="about__cta"
+    data-cursor-label="Descargar"
+  >
+    <span>Descargar CV</span>
+    <span class="about__cta-icon">↓</span>
+  </a>
+</div>
+      </div>
+    </div>
+
+    <!-- Mini-cards de datos (2x2) -->
+    <div class="about__mini-cards">
+      {datos.map((dato) => (
+  <Card
+  color={sectionColor}
+  title={dato.title}
+  icon={dato.icon}
+  description={dato.text}
+  tags={[]}
+  href="#"
+ align-items: start;
+/>
+))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    position: relative;
+    padding: 6rem 2rem 5rem;
+    background: var(--cream);
+    scroll-margin-top: 90px;
+  }
+
+  .about__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /*guirnalda superior */
+  .about__scallop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 22px;
+    background: var(--dark-red);
+    mask-image: radial-gradient(circle at 50% 0, transparent 22px, black 23px);
+    mask-size: 44px 22px;
+    mask-repeat: repeat-x;
+    -webkit-mask-image: radial-gradient(circle at 50% 0, transparent 22px, black 23px);
+    -webkit-mask-size: 44px 22px;
+    -webkit-mask-repeat: repeat-x;
+  }
+
+  /*header de sección  */
+  .about__header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .about__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--burgundy);
+    letter-spacing: 0.05em;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .about__title-underline {
+    width: 80px;
+    height: 2px;
+    background: var(--burgundy);
+    margin: 1rem auto 0;
+    opacity: 0.5;
+  }
+
+  /*foto + texto  */
+  .about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 5rem;
+  }
+
+  /* polaroid */
+  .about__photo-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .about__polaroid {
+    background: white;
+    padding: 1rem 1rem 3.5rem;
+    box-shadow:
+      0 15px 40px rgba(123, 30, 40, 0.15),
+      0 5px 15px rgba(0, 0, 0, 0.08);
+    transform: rotate(-3deg);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.5s ease;
+    position: relative;
+    max-width: 320px;
+  }
+
+  .about__polaroid:hover {
+    transform: rotate(0deg) scale(1.03);
+    box-shadow:
+      0 20px 50px rgba(123, 30, 40, 0.25),
+      0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .about__photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    filter: contrast(1.05) saturate(0.95);
+  }
+
+  .about__caption {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.25rem;
+    color: var(--burgundy);
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  .about__text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .about__greeting {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    color: var(--burgundy);
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+  }
+
+  .about__paragraph {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--burgundy);
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  .about__paragraph strong {
+    color: var(--burgundy);
+    font-weight: 600;
+    opacity: 1;
+    position: relative;
+  }
+
+  /* cta*/
+  .about__cta-wrapper {
+    margin-top: 1rem;
+  }
+
+  .about__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.75rem;
+    background: transparent;
+    color: var(--burgundy);
+    border: 2px solid var(--burgundy);
+    border-radius: 999px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .about__cta--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-style: dashed;
+  }
+
+  .about__cta:not(.about__cta--disabled):hover {
+    background: var(--burgundy);
+    color: var(--cream);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(123, 30, 40, 0.25);
+  }
+
+  .about__cta-icon {
+    font-size: 1rem;
+  }
+
+  /* mini cards */
+  .about__mini-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Override del Card para que funcione sin hover/click */
+  .about__mini-cards :global(.card) {
+    cursor: default;
+  }
+
+  .about__mini-cards :global(.card:hover) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px -12px var(--card-color);
+  }
+
+  /* responsive*/
+  @media (max-width: 900px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .about__polaroid {
+      max-width: 280px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .about {
+      padding: 5rem 1.25rem 4rem;
+    }
+
+    .about__mini-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

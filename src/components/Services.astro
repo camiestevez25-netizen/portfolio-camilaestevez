@@ -1,0 +1,147 @@
+---
+import Card from "./Card.astro";
+
+const sectionColor = "var(--gold, #D4A574)";
+
+const servicios = [
+  {
+    icon: "🎨",
+    title: "DISEÑO UI/UX",
+    subtitle: "Interfaces con identidad",
+    description:
+      "Diseño de interfaces modernas y funcionales, con foco en la experiencia de usuario, la tipografía y el color. Desde wireframes hasta el diseño final en Figma.",
+    tags: ["Figma", "Wireframes", "Prototipos", "Design System"],
+  },
+  {
+    icon: "💻",
+    title: "DESARROLLO FRONTEND",
+    subtitle: "Sitios rápidos y responsivos",
+    description:
+      "Desarrollo de sitios web con Angular, Astro o HTML/CSS/JS puro. Código limpio, semántico y optimizado para SEO y rendimiento.",
+    tags: ["Angular", "Astro", "Tailwind", "Responsive"],
+  },
+  {
+    icon: "✨",
+    title: "LANDING PAGES",
+    subtitle: "Presencia online impactante",
+    description:
+      "Landings que convierten: diseño atractivo, animaciones sutiles y estructura clara para presentar tu producto, servicio o marca personal.",
+    tags: ["One Page", "Animaciones", "SEO", "Performance"],
+  },
+  {
+    icon: "🛠️",
+    title: "MANTENIMIENTO WEB",
+    subtitle: "Tu sitio siempre al día",
+    description:
+      "Actualización de contenidos, mejoras de diseño, optimización de velocidad y soporte técnico para que tu sitio siga funcionando perfecto.",
+    tags: ["Actualizaciones", "Backups", "Optimización", "Soporte"],
+  },
+];
+---
+
+<section class="services" id="services">
+  
+
+  <div class="services__inner">
+    <header class="services__header">
+      <h2 class="services__title">SERVICIOS</h2>
+      <div class="services__title-underline"></div>
+      <p class="services__intro">
+        Lo que puedo hacer por vos, desde el diseño hasta el deploy.
+      </p>
+    </header>
+
+    <div class="services__grid">
+      {servicios.map((servicio) => (
+        <Card
+          color={sectionColor}
+          title={servicio.title}
+          subtitle={servicio.subtitle}
+          icon={servicio.icon}
+          description={servicio.description}
+          tags={servicio.tags}
+          href="/contact"
+          ctaLabel="Consultar"
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    position: relative;
+    padding: 6rem 2rem 5rem;
+    background: var(--cream);
+    scroll-margin-top: 90px;
+  }
+
+  .services__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .services__scallop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 22px;
+    background: var(--dark-red);
+    mask-image: radial-gradient(circle at 50% 0, transparent 22px, black 23px);
+    mask-size: 44px 22px;
+    mask-repeat: repeat-x;
+    -webkit-mask-image: radial-gradient(circle at 50% 0, transparent 22px, black 23px);
+    -webkit-mask-size: 44px 22px;
+    -webkit-mask-repeat: repeat-x;
+  }
+
+  .services__header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .services__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--burgundy);
+    letter-spacing: 0.05em;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .services__title-underline {
+    width: 80px;
+    height: 2px;
+    background: var(--burgundy);
+    margin: 1rem auto 1.5rem;
+    opacity: 0.5;
+  }
+
+  .services__intro {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: var(--burgundy);
+    opacity: 0.7;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+    align-items: start;
+  }
+
+  @media (max-width: 700px) {
+    .services {
+      padding: 5rem 1.25rem 4rem;
+    }
+
+    .services__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

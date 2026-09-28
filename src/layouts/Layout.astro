@@ -1,23 +1,109 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import "../styles/global.css";
+import NailCursor from "../components/NailCursor.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { ClientRouter } from "astro:transitions";
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title?: string;
+}
+
+const { title = "Camila Estévez — Portfolio" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>
+<meta name="description" content="Portfolio de Camila Estévez, desarrolladora web y diseñadora frontend. Angular, Astro, diseño UI/UX con atención al detalle." />
+<meta name="author" content="Camila Estévez" />
+<meta name="keywords" content="desarrolladora web, frontend, Angular, Astro, diseño UI, portfolio, Buenos Aires" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Camila Estévez — Desarrolladora y Diseñadora Frontend" />
+<meta property="og:description" content="Diseño y desarrollo sitios con identidad propia. Portfolio con proyectos, skills y contacto." />
+<meta property="og:image" content="/images/og-preview.jpg" />
+<meta property="og:url" content="https://tudominio.com" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Camila Estévez — Portfolio" />
+<meta name="twitter:description" content="Diseño y desarrollo sitios con identidad propia." />
+<meta name="twitter:image" content="/images/og-preview.jpg" />
+
+
+<link rel="canonical" href="https://tudominio.com" />
+    </title>
+
+    <ClientRouter />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@500;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <NailCursor transition:persist />
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      function initCards() {
+        const cards = document.querySelectorAll("[data-card]");
+
+        cards.forEach((card) => {
+          if (card.dataset.cardReady === "true") return;
+          card.dataset.cardReady = "true";
+
+          card.addEventListener("click", (e) => {
+            const cardCta = e.target.closest(".card__cta, .project-card__cta");
+            if (cardCta) return;
+
+            card.classList.toggle("is-selected");
+
+            cards.forEach((other) => {
+              if (other !== card) {
+                other.classList.remove("is-selected");
+              }
+            });
+          });
+
+          card.setAttribute("tabindex", "0");
+          card.setAttribute("role", "button");
+
+          card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              card.classList.toggle("is-selected");
+
+              cards.forEach((other) => {
+                if (other !== card) {
+                  other.classList.remove("is-selected");
+                }
+              });
+            }
+          });
+        });
+      }
+
+      initCards();
+
+      document.addEventListener("astro:page-load", () => {
+        initCards();
+      });
+
+      const observer = new MutationObserver(() => initCards());
+      observer.observe(document.body, { childList: true, subtree: true });
+    </script>
+    <script>
+  import { initScrollAnimations } from "../scripts/scroll-animations";
+  initScrollAnimations();
+</script>
+  </body>
+</html>

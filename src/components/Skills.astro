@@ -1,0 +1,151 @@
+---
+
+import Card from "./Card.astro";
+
+const sectionColor = "var(--jade, #7FB39B)";
+
+const categorias = [
+  {
+    icon: "🎨",
+    title: "FRONTEND",
+    subtitle: "Interfaces y experiencia",
+    skills: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "TypeScript",
+      "Angular",
+      "Astro",
+      "Tailwind CSS",
+    ],
+  },
+  {
+    icon: "⚙️",
+    title: "BACKEND",
+    subtitle: "Lógica y datos",
+    skills: ["Java", "PHP", "Python", "MySQL", "APIs REST"],  },
+  {
+    icon: "🛠️",
+    title: "HERRAMIENTAS",
+    subtitle: "Mi día a día",
+    skills: ["Git", "GitHub", "VS Code", "WordPress"],
+  },
+  {
+    icon: "🎭",
+    title: "DISEÑO",
+    subtitle: "Lo visual",
+    skills: ["Figma", "Photoshop", "Illustrator", "Canva"],
+  },
+];
+---
+
+<section class="skills" id="skills">
+  
+
+  <div class="skills__inner">
+    <header class="skills__header">
+      <h2 class="skills__title">SKILLS</h2>
+      <div class="skills__title-underline"></div>
+      <p class="skills__intro">
+        Las herramientas que uso para convertir ideas en experiencias digitales.
+      </p>
+    </header>
+
+    <div class="skills__grid">
+      {categorias.map((cat) => (
+        <Card
+          color={sectionColor}
+          title={cat.title}
+          subtitle={cat.subtitle}
+          icon={cat.icon}
+          description=""
+          tags={cat.skills}
+          href="#"
+          ctaLabel="Cerrar"
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    position: relative;
+    padding: 6rem 2rem 5rem;
+    background: var(--cream);
+    scroll-margin-top: 90px;
+  }
+
+  .skills__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* guirnalda superior */
+  .skills__scallop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 22px;
+    background: var(--dark-red);
+    mask-image: radial-gradient(circle at 50% 0, transparent 22px, black 23px);
+    mask-size: 44px 22px;
+    mask-repeat: repeat-x;
+    -webkit-mask-image: radial-gradient(circle at 50% 0, transparent 22px, black 23px);
+    -webkit-mask-size: 44px 22px;
+    -webkit-mask-repeat: repeat-x;
+  }
+
+  /* header de sección */
+  .skills__header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .skills__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--burgundy);
+    letter-spacing: 0.05em;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .skills__title-underline {
+    width: 80px;
+    height: 2px;
+    background: var(--burgundy);
+    margin: 1rem auto 1.5rem;
+    opacity: 0.5;
+  }
+
+  .skills__intro {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: var(--burgundy);
+    opacity: 0.7;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* grid de cards */
+  .skills__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+    align-items: start;
+  }
+
+  /* responsive */
+  @media (max-width: 700px) {
+    .skills {
+      padding: 5rem 1.25rem 4rem;
+    }
+
+    .skills__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,277 @@
+---
+const navItems = [
+  { label: "HOME", href: "/" },
+  { label: "ABOUT", href: "/about" },
+  { label: "PROJECTS", href: "/projects" },
+  { label: "SERVICES", href: "/services" },
+  { label: "CONTACT", href: "/contact" },
+];
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <!-- btn hamburguesa en mobile -->
+    <button
+      class="menu-toggle"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      id="menuToggle"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- nav desktop -->
+    <nav class="nav-desktop" aria-label="Navegación principal">
+      {navItems.map((item) => (
+        <a href={item.href} class="nav-link">{item.label}</a>
+      ))}
+    </nav>
+  </div>
+  <header class="site-header">
+  <div class="header-inner">
+<nav class="nav-desktop" aria-label="Navegación principal">
+      {navItems.map((item) => (
+        <a href={item.href} class="nav-link">{item.label}</a>
+      ))}
+    </nav>  </div>
+
+  <!-- degrade de transición  -->
+  <div class="header-fade" aria-hidden="true"></div>
+
+</header>
+
+<!-- menu mobile-->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav class="mobile-nav">
+    {navItems.map((item) => (
+      <a href={item.href} class="mobile-link">{item.label}</a>
+    ))}
+  </nav>
+</div>
+
+<style>
+  /* header */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+  }
+
+  .header-inner {
+    background: var(--pink);
+    padding: 0.75rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* nav desktop */
+  .nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-left: auto;
+  }
+
+  .nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--burgundy);
+    text-decoration: none;
+    position: relative;
+    padding: 0.25rem 0;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--burgundy);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Estado activo: subrayado fijo */
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  
+
+  /* btn hamburguesa  */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 110;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2.5px;
+    background: var(--burgundy);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* menu mobile */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--pink);
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .mobile-link {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--burgundy);
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+
+  .mobile-link:hover {
+    transform: scale(1.05);
+  }
+
+  .mobile-search {
+    margin-top: 1rem;
+    background: var(--burgundy);
+    color: var(--pink);
+    border: none;
+    padding: 0.9rem 2rem;
+    border-radius: 999px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    align-self: center;
+  }
+
+  /* responsive */
+  @media (max-width: 768px) {
+    .header-inner {
+      padding: 0.9rem 1.25rem;
+    }
+
+    .nav-desktop {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+  }
+
+  /* transición de degrade*/
+.header-fade {
+  height: 20px;
+  background: linear-gradient(
+    to bottom,
+    var(--pink) 0%,
+    rgba(126, 217, 245, 0.7) 30%,
+    rgba(103, 126, 255, 0.3) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  margin-bottom: -20px; 
+   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+}
+
+</style>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('mobileMenu');
+  const links = menu?.querySelectorAll('.mobile-link, .mobile-search');
+
+  function closeMenu() {
+    toggle?.classList.remove('active');
+    menu?.classList.remove('open');
+    toggle?.setAttribute('aria-expanded', 'false');
+    menu?.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('open');
+    toggle.classList.toggle('active');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    menu?.setAttribute('aria-hidden', String(!isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  links?.forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  
+  function markActiveLink() {
+    const currentPath = window.location.pathname;
+    document.querySelectorAll('.nav-link').forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href === currentPath) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  markActiveLink();
+  document.addEventListener('astro:page-load', markActiveLink);
+</script>

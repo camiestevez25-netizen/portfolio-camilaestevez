@@ -1,0 +1,174 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+
+const sectionColor = "var(--pink-soft, #E8B4B8)";
+const enProceso = "var(--gold, #D4A574)";
+
+const proyectos = [
+  {
+    title: "BRIXCODE",
+    year: "2025",
+    subtitle: "Landing corporativa para empresa de software",
+    description:
+      "Sitio web institucional para BRIXCODE, una empresa dedicada al desarrollo de software. Construido con Angular en modo standalone, con carga diferida (lazy loading) para optimizar el rendimiento. El frontend está desplegado en Vercel.",
+    image: "/images/brixcode.webp",
+    tags: [
+      "Angular",
+      "TypeScript",
+      "Standalone",
+      "Lazy Loading",
+      "SCSS",
+      "Vercel",
+    ],
+    status: "En proceso",
+    href: "#",
+  },
+  {
+    title: "GYM ADMIN",
+    year: "2025",
+    subtitle: "App de gestión de rutinas para entrenadores",
+    description:
+      "Aplicación web para entrenadores personales: pueden crear y administrar rutinas de entrenamiento para sus clientes, hacer seguimiento del progreso, y los clientes pueden marcar cada ejercicio como completado. Incluye dashboard, gestión de clientes, calendario y biblioteca de ejercicios.",
+    image: "/images/gym_admin.webp",
+    tags: [
+      "Angular",
+      "TypeScript",
+      "Dashboard",
+      "Lazy Loading",
+      "APIs REST",
+    ],
+    status: "En proceso",
+    href: "#",
+  },
+  {
+    title: "RED EMPRENDEDORA",
+    year: "2025",
+    subtitle: "Plataforma para conectar emprendedores",
+    description:
+      "Proyecto en desarrollo orientado a crear una red que conecte emprendedores locales, permitiéndoles compartir recursos, colaborar y visibilizar sus proyectos. Actualmente en etapa de backend, con foco en la arquitectura de datos y la lógica de negocio.",
+    image: "",
+    tags: ["Java", "IntelliJ IDEA", "MySQL"],
+    status: "En proceso",
+    href: "#",
+  },
+];
+---
+
+<section class="projects" id="projects">
+ 
+
+  <div class="projects__inner">
+    <header class="projects__header">
+      <h2 class="projects__title">PROYECTOS</h2>
+      <div class="projects__title-underline"></div>
+      <p class="projects__intro">
+        Algunos de los proyectos en los que estuve trabajando, con foco en diseño, código y experiencia de usuario.
+      </p>
+    </header>
+
+    <div class="projects__grid">
+      {proyectos.map((proyecto) => (
+        <ProjectCard
+          color={sectionColor}
+          statusColor={enProceso}
+          title={proyecto.title}
+          year={proyecto.year}
+          subtitle={proyecto.subtitle}
+          description={proyecto.description}
+          image={proyecto.image}
+          tags={proyecto.tags}
+          status={proyecto.status}
+          href={proyecto.href}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects {
+    position: relative;
+    padding: 6rem 2rem 5rem;
+    background: var(--cream);
+    scroll-margin-top: 90px;
+  }
+
+  .projects__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* guirnalda superior */
+  .projects__scallop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 22px;
+    background: var(--dark-red);
+    mask-image: radial-gradient(circle at 50% 0, transparent 22px, black 23px);
+    mask-size: 44px 22px;
+    mask-repeat: repeat-x;
+    -webkit-mask-image: radial-gradient(circle at 50% 0, transparent 22px, black 23px);
+    -webkit-mask-size: 44px 22px;
+    -webkit-mask-repeat: repeat-x;
+  }
+
+  /* header */
+  .projects__header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .projects__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--burgundy);
+    letter-spacing: 0.05em;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .projects__title-underline {
+    width: 80px;
+    height: 2px;
+    background: var(--burgundy);
+    margin: 1rem auto 1.5rem;
+    opacity: 0.5;
+  }
+
+  .projects__intro {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: var(--burgundy);
+    opacity: 0.7;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* grid de proyectos */
+  .projects__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  /* responsive */
+  @media (max-width: 1000px) {
+    .projects__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .projects {
+      padding: 5rem 1.25rem 4rem;
+    }
+
+    .projects__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

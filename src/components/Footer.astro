@@ -1,0 +1,196 @@
+---
+const year = new Date().getFullYear();
+
+const redes = [
+  {
+    label: "GitHub",
+    href: "https://github.com/camiestevez25-netizen",
+    icon: "🐙",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/camila-estevez-961715314",
+    icon: "💼",
+  },
+  {
+    label: "Instagram",
+    href: "https://instagram.com/camii_estevezz",
+    icon: "📷",
+  },
+  {
+    label: "Email",
+    href: "mailto:camiestevez25@gmail.com",
+    icon: "✉️",
+  },
+];
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <p class="footer__name">Camila Estévez</p>
+      <p class="footer__tagline">Diseño y código, con atención al detalle.</p>
+    </div>
+
+    <div class="footer__socials">
+      {redes.map((red) => (
+        <a
+          href={red.href}
+          class="footer__social"
+          aria-label={red.label}
+          target={red.href.startsWith("http") ? "_blank" : undefined}
+          rel={red.href.startsWith("http") ? "noopener" : undefined}
+        >
+          <span>{red.icon}</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">
+        © {year} Camila Estévez · Hecho con 💜 y mucho café
+      </p>
+      <button class="footer__top" id="backToTop" aria-label="Volver arriba">
+        <span>Volver arriba</span>
+        <span class="footer__top-arrow">↑</span>
+      </button>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--burgundy);
+    color: var(--cream);
+    padding: 3.5rem 2rem 2rem;
+  }
+
+  .footer__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .footer__brand {
+    text-align: center;
+  }
+
+  .footer__name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin: 0 0 0.5rem;
+    line-height: 1;
+  }
+
+  .footer__tagline {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    color: var(--cream);
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  .footer__socials {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer__social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 2px solid var(--cream);
+    border-radius: 50%;
+    font-size: 1.25rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .footer__social:hover {
+    background: var(--cream);
+    transform: translateY(-3px) scale(1.05);
+  }
+
+  .footer__social span {
+    line-height: 1;
+  }
+
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(245, 239, 224, 0.2);
+    flex-wrap: wrap;
+  }
+
+  .footer__copy {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    color: var(--cream);
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .footer__top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 1.5px solid var(--cream);
+    color: var(--cream);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .footer__top:hover {
+    background: var(--cream);
+    color: var(--burgundy);
+    transform: translateY(-2px);
+  }
+
+  .footer__top-arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .footer__top:hover .footer__top-arrow {
+    transform: translateY(-3px);
+  }
+
+  /* responsive*/
+  @media (max-width: 600px) {
+    .footer {
+      padding: 3rem 1.25rem 1.5rem;
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  const backToTop = document.getElementById("backToTop");
+
+  backToTop?.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+</script>
