@@ -17,27 +17,38 @@ const { title = "Camila Estévez — Portfolio" } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Título -->
+    <title>{title}</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Portfolio de Camila Estévez, desarrolladora web y diseñadora frontend. Angular, Astro, diseño UI/UX con atención al detalle." />
+    <meta name="author" content="Camila Estévez" />
+    <meta name="keywords" content="desarrolladora web, frontend, Angular, Astro, diseño UI, portfolio, Buenos Aires" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Camila Estévez — Desarrolladora y Diseñadora Frontend" />
+    <meta property="og:description" content="Diseño y desarrollo sitios con identidad propia. Portfolio con proyectos, skills y contacto." />
+    <meta property="og:image" content="/images/og-preview.jpg" />
+    <meta property="og:url" content="https://tudominio.com" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Camila Estévez — Portfolio" />
+    <meta name="twitter:description" content="Diseño y desarrollo sitios con identidad propia." />
+    <meta name="twitter:image" content="/images/og-preview.jpg" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://tudominio.com" />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>
-<meta name="description" content="Portfolio de Camila Estévez, desarrolladora web y diseñadora frontend. Angular, Astro, diseño UI/UX con atención al detalle." />
-<meta name="author" content="Camila Estévez" />
-<meta name="keywords" content="desarrolladora web, frontend, Angular, Astro, diseño UI, portfolio, Buenos Aires" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Camila Estévez — Desarrolladora y Diseñadora Frontend" />
-<meta property="og:description" content="Diseño y desarrollo sitios con identidad propia. Portfolio con proyectos, skills y contacto." />
-<meta property="og:image" content="/images/og-preview.jpg" />
-<meta property="og:url" content="https://tudominio.com" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Camila Estévez — Portfolio" />
-<meta name="twitter:description" content="Diseño y desarrollo sitios con identidad propia." />
-<meta name="twitter:image" content="/images/og-preview.jpg" />
 
-
-<link rel="canonical" href="https://tudominio.com" />
-    </title>
-
+    <!-- Router -->
     <ClientRouter />
 
+    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -101,9 +112,5 @@ const { title = "Camila Estévez — Portfolio" } = Astro.props;
       const observer = new MutationObserver(() => initCards());
       observer.observe(document.body, { childList: true, subtree: true });
     </script>
-    <script>
-  import { initScrollAnimations } from "../scripts/scroll-animations";
-  initScrollAnimations();
-</script>
   </body>
 </html>
